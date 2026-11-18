@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><AssemblyName>OCS.Services</AssemblyName><RootNamespace>OCS.Services</RootNamespace></PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="10.0.15" />
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlcipher" Version="2.1.11" />
+    <ProjectReference Include="..\OCS.Core\OCS.Core.csproj" />
+  </ItemGroup>
+</Project>

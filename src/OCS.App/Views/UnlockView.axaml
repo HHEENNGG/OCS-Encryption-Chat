@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="OCS.App.Views.UnlockView">
+  <Grid Background="#141416">
+    <Border MaxWidth="520" Margin="24" Padding="32" CornerRadius="12"
+            Background="#1e1e22" BorderBrush="#333" BorderThickness="1"
+            VerticalAlignment="Center" HorizontalAlignment="Center">
+      <StackPanel Spacing="14">
+        <TextBlock Text="OCS Encryption Chat" FontSize="24" FontWeight="Bold"/>
+        <TextBlock Text="离线优先 · 剪贴板加密聊天 · 无服务器 · 无网络"
+                   Foreground="#9aa0a6" FontSize="12"/>
+        <TextBlock Text="创建新加密库:设置主密码(至少 8 位)。主密码经 Argon2id 派生包装密钥,永不存储;丢失后无法恢复数据。"
+                   TextWrapping="Wrap" Foreground="#cfd2d6" FontSize="12"
+                   IsVisible="{Binding IsNewVault}"/>
+        <TextBlock Text="输入主密码解锁本地加密库。错误密码将被拒绝(fail closed)。"
+                   TextWrapping="Wrap" Foreground="#cfd2d6" FontSize="12"
+                   IsVisible="{Binding IsNewVault, Converter={StaticResource InverseBool}}"/>
+        <TextBox Watermark="主密码" PasswordChar="●"
+                 Text="{Binding Password}" IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}"/>
+        <TextBox Watermark="确认主密码" PasswordChar="●"
+                 Text="{Binding ConfirmPassword}" IsVisible="{Binding IsNewVault}"
+                 IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBool}}"/>
+        <Button Content="解锁 / 创建" Command="{Binding SubmitCommand}"
+                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"
+                Classes="accent" Padding="0,10"/>
+        <TextBlock Text="{Binding Status}" TextWrapping="Wrap" Foreground="#ffb4ab" FontSize="12"/>
+        <TextBlock Text="警告:本软件未经独立安全审计,请勿用于真实敏感通信。剪贴板不是可信信道;「已复制」不代表已送达。"
+                   TextWrapping="Wrap" Foreground="#8a8f98" FontSize="11"/>
+      </StackPanel>
+    </Border>
+  </Grid>
+</UserControl>

@@ -1,0 +1,17 @@
+//
+// Copyright 2020-2021 Signal Messenger, LLC.
+// SPDX-License-Identifier: AGPL-3.0-only
+//
+
+import type { Bytes } from '@signalapp/types';
+
+import ByteArray from '../internal/ByteArray.js';
+
+export default class GroupMasterKey extends ByteArray {
+  private readonly __type?: never;
+  static SIZE = 32;
+
+  constructor(contents: Bytes) {
+    super(contents, GroupMasterKey.checkLength(GroupMasterKey.SIZE));
+  }
+}

@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="OCS.App.Views.KeysView">
+  <ScrollViewer>
+    <StackPanel Margin="20" Spacing="14" MaxWidth="760">
+      <TextBlock Text="密钥管理" FontSize="18" FontWeight="Bold"/>
+      <TextBlock Text="我的身份指纹(与对方带外比对):" FontWeight="SemiBold"/>
+      <Border Background="#1a1a1e" CornerRadius="8" Padding="14">
+        <SelectableTextBlock Text="{Binding LocalFingerprint}" FontFamily="Consolas"
+                             FontSize="14" TextWrapping="Wrap"/>
+      </Border>
+      <StackPanel Orientation="Horizontal" Spacing="10">
+        <TextBlock Text="可用一次性预密钥(OTPK):" VerticalAlignment="Center"/>
+        <TextBlock Text="{Binding OtpkCount}" FontWeight="Bold" VerticalAlignment="Center"/>
+        <Button Content="刷新" Command="{Binding RefreshCommand}" Padding="10,4" FontSize="12"/>
+      </StackPanel>
+      <TextBlock Text="OTPK 耗尽时不会静默降级:请导出新公钥包让对方重新导入。每次导出都会生成全新批次,已被消费的密钥不会复用。"
+                 TextWrapping="Wrap" FontSize="11" Foreground="#9aa0a6"/>
+      <StackPanel Orientation="Horizontal" Spacing="10">
+        <Button Content="导出新公钥包(复制)" Command="{Binding ExportBundleCommand}"
+                Classes="accent" Padding="14,8"/>
+        <Button Content="导出到文件…" Command="{Binding SaveBundleCommand}" Padding="14,8"/>
+      </StackPanel>
+      <TextBlock Text="{Binding StatusText}" TextWrapping="Wrap" Foreground="#9aa0a6" FontSize="12"/>
+      <Separator/>
+      <TextBlock Text="私钥与会话状态仅以主密码派生密钥包装后存于加密数据库,绝不导出。公钥包只含公钥、签名与元数据。"
+                 TextWrapping="Wrap" FontSize="11" Foreground="#8a8f98"/>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

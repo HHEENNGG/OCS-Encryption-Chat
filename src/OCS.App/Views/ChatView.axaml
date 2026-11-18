@@ -1,0 +1,58 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="OCS.App.Views.ChatView">
+  <Grid ColumnDefinitions="260,*">
+    <Border Grid.Column="0" Background="#1a1a1e" BorderBrush="#2c2c30" BorderThickness="0,0,1,0">
+      <DockPanel>
+        <StackPanel DockPanel.Dock="Top" Margin="12,12,12,6" Spacing="6">
+          <TextBlock Text="会话" FontWeight="Bold" FontSize="14"/>
+          <Button Content="刷新" Command="{Binding RefreshCommand}" Padding="8,4" FontSize="12"/>
+        </StackPanel>
+        <ListBox ItemsSource="{Binding Conversations}" SelectedItem="{Binding SelectedConversation}"
+                 Margin="6">
+          <ListBox.ItemTemplate>
+            <DataTemplate>
+              <StackPanel Spacing="2" Margin="4">
+                <TextBlock Text="{Binding DisplayName}" FontWeight="SemiBold"/>
+                <TextBlock Text="{Binding TrustBadge}" FontSize="11"
+                           Foreground="{Binding TrustBadge, Converter={StaticResource TrustBrush}}"/>
+              </StackPanel>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+      </DockPanel>
+    </Border>
+    <DockPanel Grid.Column="1" Margin="12">
+      <TextBlock DockPanel.Dock="Top" Text="{Binding SelectedConversation.DisplayName}"
+                 FontSize="16" FontWeight="Bold" Margin="0,0,0,8"/>
+      <Border DockPanel.Dock="Bottom" Margin="0,8,0,0">
+        <StackPanel Spacing="6">
+          <Grid ColumnDefinitions="*,Auto,Auto">
+            <TextBox Grid.Column="0" Watermark="输入消息…(加密后复制到剪贴板,由你手动发送给对方)"
+                     Text="{Binding ComposerText}" AcceptsReturn="True" TextWrapping="Wrap"
+                     MinHeight="56" MaxHeight="140" Margin="0,0,8,0"/>
+            <Button Grid.Column="1" Content="加密并复制" Command="{Binding SendCommand}"
+                    Classes="accent" Padding="14,10" Margin="0,0,8,0"/>
+            <Button Grid.Column="2" Content="立即导入剪贴板" Command="{Binding ImportNowCommand}"
+                    Padding="14,10"/>
+          </Grid>
+          <TextBlock Text="{Binding StatusText}" TextWrapping="Wrap" Foreground="#9aa0a6" FontSize="12"/>
+        </StackPanel>
+      </Border>
+      <ListBox ItemsSource="{Binding Messages}" Background="Transparent" BorderThickness="0">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <Border Background="{Binding IsOutgoing, Converter={StaticResource OutBrush}}"
+                    HorizontalAlignment="{Binding IsOutgoing, Converter={StaticResource OutAlign}}"
+                    CornerRadius="10" Padding="12,8" Margin="4" MaxWidth="560">
+              <StackPanel Spacing="4">
+                <TextBlock Text="{Binding Text}" TextWrapping="Wrap"/>
+                <TextBlock Text="{Binding Caption}" FontSize="10" Foreground="#9aa0a6"/>
+              </StackPanel>
+            </Border>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+    </DockPanel>
+  </Grid>
+</UserControl>

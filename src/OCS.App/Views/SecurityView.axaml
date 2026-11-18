@@ -1,0 +1,36 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="OCS.App.Views.SecurityView">
+  <Grid ColumnDefinitions="*,360">
+    <DockPanel Grid.Column="0" Margin="12">
+      <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Spacing="8" Margin="0,0,0,8">
+        <TextBlock Text="安全中心" FontSize="16" FontWeight="Bold" VerticalAlignment="Center"/>
+        <Button Content="刷新" Command="{Binding RefreshCommand}" Padding="8,4" FontSize="12"/>
+        <Button Content="{Binding MonitoringPaused, Converter={StaticResource MonitoringLabel}}"
+                Command="{Binding ToggleMonitoringCommand}" Padding="8,4" FontSize="12"/>
+        <Button Content="立即锁定" Command="{Binding LockNowCommand}" Padding="8,4" FontSize="12"/>
+      </StackPanel>
+      <ListBox ItemsSource="{Binding Events}" SelectedItem="{Binding SelectedEvent}">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <StackPanel Orientation="Horizontal" Spacing="12" Margin="4">
+              <TextBlock Text="{Binding TimeText}" FontSize="11" Foreground="#9aa0a6" Width="140"/>
+              <TextBlock Text="{Binding EventType}" FontSize="12"/>
+            </StackPanel>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+    </DockPanel>
+    <Border Grid.Column="1" Background="#1a1a1e" BorderBrush="#2c2c30" BorderThickness="1,0,0,0">
+      <DockPanel Margin="14">
+        <TextBlock DockPanel.Dock="Top" Text="事件详情(加密存储,选择后解密)" FontWeight="Bold" Margin="0,0,0,8"/>
+        <TextBlock DockPanel.Dock="Bottom" Text="{Binding StatusText}" TextWrapping="Wrap"
+                   Foreground="#9aa0a6" FontSize="11" Margin="0,8,0,0"/>
+        <ScrollViewer>
+          <SelectableTextBlock Text="{Binding SelectedEvent.DetailsText}" TextWrapping="Wrap"
+                               FontFamily="Consolas" FontSize="11"/>
+        </ScrollViewer>
+      </DockPanel>
+    </Border>
+  </Grid>
+</UserControl>

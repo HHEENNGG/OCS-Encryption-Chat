@@ -1,0 +1,32 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="OCS.App.MainWindow"
+        Title="OCS Encryption Chat — 离线加密聊天"
+        Width="1100" Height="720" MinWidth="880" MinHeight="560"
+        Background="#141416">
+  <Grid ColumnDefinitions="Auto,*">
+    <Border Grid.Column="0" Width="200" Background="#1a1a1e"
+            BorderBrush="#2c2c30" BorderThickness="0,0,1,0"
+            IsVisible="{Binding IsUnlocked}">
+      <Grid RowDefinitions="*,Auto" Margin="12">
+        <StackPanel Grid.Row="0" Spacing="4">
+          <TextBlock Text="OCS" FontSize="20" FontWeight="Bold"/>
+          <TextBlock Text="离线 · 加密 · 无网络" FontSize="11" Foreground="#9aa0a6" Margin="0,0,0,14"/>
+          <Button Content="聊天" Command="{Binding NavCommand}" CommandParameter="chat"
+                  HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="10,8"/>
+          <Button Content="联系人" Command="{Binding NavCommand}" CommandParameter="contacts"
+                  HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="10,8"/>
+          <Button Content="密钥管理" Command="{Binding NavCommand}" CommandParameter="keys"
+                  HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="10,8"/>
+          <Button Content="安全中心" Command="{Binding NavCommand}" CommandParameter="security"
+                  HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="10,8"/>
+          <Button Content="设置" Command="{Binding NavCommand}" CommandParameter="settings"
+                  HorizontalAlignment="Stretch" HorizontalContentAlignment="Left" Padding="10,8"/>
+        </StackPanel>
+        <Button Grid.Row="1" Content="锁定" Command="{Binding LockCommand}"
+                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Padding="10,8"/>
+      </Grid>
+    </Border>
+    <ContentControl Grid.Column="1" Content="{Binding CurrentPage}"/>
+  </Grid>
+</Window>

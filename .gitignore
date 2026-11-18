@@ -1,0 +1,34 @@
+# Build artifacts
+bin/
+obj/
+target/
+.vs/
+.idea/
+*.user
+*.suo
+TestResults/
+
+# OS / editor noise
+Thumbs.db
+.DS_Store
+*.swp
+
+# Local secrets / data — never commit
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+*.key
+*.pem
+*.p12
+*.pfx
+*.snk
+.env
+vault.meta
+*.ocsbackup
+
+# NOTE: lock files ARE committed (BUILD.md requires verified, locked versions):
+#   packages.lock.json (NuGet) and native/ocs-signal-bridge/Cargo.lock (Rust).
+# NOTE: native/prebuilt/win-x64/ocs_signal_bridge.dll is intentionally committed
+#   so the app builds without a Rust toolchain (rebuild via scripts/build_bridge.sh).

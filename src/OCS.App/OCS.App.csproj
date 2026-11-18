@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>OCS.Encryption.Chat</AssemblyName>
+    <RootNamespace>OCS.App</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.23" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.3.23" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.23" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.23" />
+    <ProjectReference Include="..\OCS.Core\OCS.Core.csproj" />
+    <ProjectReference Include="..\OCS.Services\OCS.Services.csproj" />
+    <ProjectReference Include="..\OCS.Platform\OCS.Platform.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Native Signal bridge (built from native/ocs-signal-bridge; see scripts/build-bridge.ps1). -->
+    <None Include="..\..\native\prebuilt\win-x64\ocs_signal_bridge.dll" Link="ocs_signal_bridge.dll" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+  </ItemGroup>
+</Project>

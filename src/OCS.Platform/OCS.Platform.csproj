@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><AssemblyName>OCS.Platform</AssemblyName><RootNamespace>OCS.Platform</RootNamespace></PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.23" />
+    <ProjectReference Include="..\OCS.Core\OCS.Core.csproj" />
+  </ItemGroup>
+</Project>

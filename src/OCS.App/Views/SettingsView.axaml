@@ -1,0 +1,36 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="OCS.App.Views.SettingsView">
+  <ScrollViewer>
+    <StackPanel Margin="20" Spacing="14" MaxWidth="760">
+      <TextBlock Text="设置" FontSize="18" FontWeight="Bold"/>
+      <StackPanel Orientation="Horizontal" Spacing="10">
+        <TextBlock Text="不活动自动锁定(分钟):" VerticalAlignment="Center"/>
+        <NumericUpDown Minimum="1" Maximum="120" Value="{Binding AutoLockMinutes}" Width="120"/>
+      </StackPanel>
+      <TextBlock Text="锁定会清除内存中的敏感视图模型并停止剪贴板监视;解锁需要主密码。"
+                 TextWrapping="Wrap" FontSize="11" Foreground="#9aa0a6"/>
+      <Separator/>
+      <TextBlock Text="加密备份" FontWeight="Bold"/>
+      <TextBlock Text="备份 = 认证加密归档(加密数据库快照 + 包装密钥元数据)。密码经 Argon2id 派生;恢复时先完整验证再原子替换。损坏的备份会被拒绝且不改动活动数据。"
+                 TextWrapping="Wrap" FontSize="11" Foreground="#9aa0a6"/>
+      <StackPanel Orientation="Horizontal" Spacing="8">
+        <TextBox Watermark="备份密码(≥8位,建议=主密码)" PasswordChar="●"
+                 Text="{Binding BackupPassword}" Width="280"/>
+        <Button Content="创建备份…" Command="{Binding CreateBackupCommand}" Padding="12,6"/>
+      </StackPanel>
+      <StackPanel Orientation="Horizontal" Spacing="8">
+        <TextBox Watermark="恢复用备份密码" PasswordChar="●"
+                 Text="{Binding RestorePassword}" Width="280"/>
+        <Button Content="从备份恢复…" Command="{Binding RestoreBackupCommand}" Padding="12,6"/>
+      </StackPanel>
+      <TextBlock Text="{Binding StatusText}" TextWrapping="Wrap" Foreground="#9aa0a6" FontSize="12"/>
+      <Separator/>
+      <TextBlock Text="数据目录" FontWeight="SemiBold"/>
+      <SelectableTextBlock Text="{Binding VaultDirectory}" FontFamily="Consolas" FontSize="11"
+                           TextWrapping="Wrap" Foreground="#9aa0a6"/>
+      <Separator/>
+      <TextBlock Text="{Binding AboutText}" TextWrapping="Wrap" FontSize="11" Foreground="#8a8f98"/>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

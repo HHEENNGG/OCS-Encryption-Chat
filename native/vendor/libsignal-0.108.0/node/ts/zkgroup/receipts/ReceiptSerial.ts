@@ -1,0 +1,17 @@
+//
+// Copyright 2021 Signal Messenger, LLC.
+// SPDX-License-Identifier: AGPL-3.0-only
+//
+
+import type { Bytes } from '@signalapp/types';
+
+import ByteArray from '../internal/ByteArray.js';
+
+export default class ReceiptSerial extends ByteArray {
+  private readonly __type?: never;
+  static SIZE = 16;
+
+  constructor(contents: Bytes) {
+    super(contents, ReceiptSerial.checkLength(ReceiptSerial.SIZE));
+  }
+}

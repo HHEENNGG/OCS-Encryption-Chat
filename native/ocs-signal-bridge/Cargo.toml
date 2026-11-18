@@ -1,0 +1,65 @@
+# OCS Signal bridge — FFI boundary over the official Signal Protocol implementation.
+# SPDX-License-Identifier: AGPL-3.0-only
+#
+# Cryptography is provided exclusively by the vendored official libsignal
+# (signalapp/libsignal v0.108.0, PQXDH + Double Ratchet) and RustCrypto
+# primitives (argon2, chacha20poly1305, sha2). No custom cryptography.
+
+[package]
+name = "ocs-signal-bridge"
+version = "0.1.0"
+edition = "2021"
+license = "AGPL-3.0-only"
+publish = false
+
+[lib]
+name = "ocs_signal_bridge"
+crate-type = ["cdylib", "staticlib", "rlib"]
+
+[dependencies]
+libsignal-protocol = { path = "../vendor/libsignal-0.108.0/rust/protocol" }
+async-trait = "0.1"
+futures-executor = "0.3"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+base64 = "0.22"
+hex = "0.4"
+rand = "0.9"
+argon2 = "0.5"
+chacha20poly1305 = "0.11"
+sha2 = "0.10"
+zeroize = "1"
+
+[profile.release]
+overflow-checks = true
+
+[profile.release.package.curve25519-dalek]
+overflow-checks = false
+
+[profile.release.package.sha2]
+overflow-checks = false
+
+[profile.release.package.hmac]
+overflow-checks = false
+
+# Keep KDF / crypto fast enough for interactive use and tests in dev builds.
+[profile.dev.package.argon2]
+opt-level = 2
+
+[profile.dev.package.chacha20poly1305]
+opt-level = 2
+
+[profile.dev.package.sha2]
+opt-level = 2
+
+[profile.dev.package.curve25519-dalek]
+opt-level = 2
+
+[profile.dev.package.libcrux-ml-kem]
+opt-level = 2
+
+[profile.dev.package.libsignal-protocol]
+opt-level = 1
+
+[profile.dev.package.signal-crypto]
+opt-level = 1

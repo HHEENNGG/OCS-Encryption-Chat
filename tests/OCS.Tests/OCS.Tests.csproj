@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <AssemblyName>OCS.Tests</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.2" />
+    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\OCS.Core\OCS.Core.csproj" />
+    <ProjectReference Include="..\..\src\OCS.Services\OCS.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\native\prebuilt\win-x64\ocs_signal_bridge.dll"
+          Link="ocs_signal_bridge.dll"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
